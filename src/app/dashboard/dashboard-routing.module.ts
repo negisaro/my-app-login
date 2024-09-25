@@ -1,0 +1,43 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
+import { AboutPageComponent } from '../shared/pages/about-page/about-page.component';
+import { HomePageComponent } from '../shared/pages/home-page/home-page.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: DashboardLayoutComponent,
+    children: [
+      {
+        path: 'home',
+        component: HomePageComponent,
+      },
+      {
+        path: 'about',
+        component: AboutPageComponent,
+      },
+      {
+        path: 'user',
+        loadChildren: () =>
+          import('../user/user.module').then((m) => m.UserModule),
+      },
+      {
+        path: 'product',
+        loadChildren: () =>
+          import('../product/product.module').then((m) => m.ProductModule),
+      },
+      {
+        path: '**',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      }
+    ],
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class DashboardRoutingModule {}

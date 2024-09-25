@@ -1,0 +1,41 @@
+<div *ngIf="products.length === 0; else table" class="alert alert-warning text-center">
+  NO hay productos que mostrar
+</div>
+
+<ng-template #table>
+
+  <button type="submit" class="btn btn-sl btn-outline-primary" routerLink="product/add-product">Ingresar Producto </button>
+
+  <div class="flex flex-col">
+    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+        <div class="overflow-hidden">
+          <table class="min-w-full text-center text-sm font-light text-surface dark:text-white" data-twe-spy="scroll"
+            data-twe-target="#scrollspy-collapsible" data-twe-offset="0">
+            <thead class="border-b border-neutral-200 bg-[#68829b] font-medium text-white dark:border-white/10">
+              <tr>
+                <th scope="col" class=" px-6 py-4 text-left">#</th>
+                <th scope="col" class=" px-6 py-4 text-left">Nombre </th>
+                <th scope="col" class=" px-6 py-4 text-left">sku</th>
+                <th scope="col" class=" px-6 py-4 text-left">Precio</th>
+                <th scope="col" class=" px-6 py-4">Descripcion</th>
+                <th colspan="3" style="text-align: center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let product of products; let i = index">
+              <tr class="border-b border-neutral-200 dark:border-white/10">
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{i + 1}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{product.name}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{product.sku}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-center">{{product.price | number}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left">{{product.description}}</td>
+                <th><button class="btn btn-sm btn-outline-success">Update</button></th>
+                <th><button type="submit" class="btn btn-sm btn-outline-danger">Delete</button></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
