@@ -25,7 +25,7 @@ export class ProductService {
     return this.http.post<Product>(`${this.baseUrl}/api/products`, product);
   }
 
-  deleteProductById(id: string): Observable<boolean> {
+  deleteProductById(id: number): Observable<boolean> {
     return this.http.delete(`${this.baseUrl}/api/products/${id}`).pipe(
       catchError((err) => of(false)),
       map((resp) => true)

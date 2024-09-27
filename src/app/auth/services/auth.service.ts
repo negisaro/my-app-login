@@ -32,7 +32,7 @@ export class AuthService {
     this._currentUser.set(user);
     this._authStatus.set(AuthStatus.authenticated);
     localStorage.setItem('token', token);
-
+   
     return true;
   }
 

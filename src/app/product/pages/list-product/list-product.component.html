@@ -4,7 +4,8 @@
 
 <ng-template #table>
 
-  <button type="submit" class="btn btn-sl btn-outline-primary" routerLink="product/add-product">Ingresar Producto </button>
+  <button type="submit" class="btn btn-sl btn-outline-primary" routerLink="product/add-product">Ingresar Producto
+  </button>
 
   <div class="flex flex-col">
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -30,12 +31,14 @@
                 <td class="whitespace-nowrap  px-6 py-4 text-center">{{product.price | number}}</td>
                 <td class="whitespace-nowrap  px-6 py-4 text-left">{{product.description}}</td>
                 <th><button class="btn btn-sm btn-outline-success">Update</button></th>
-                <th><button type="submit" class="btn btn-sm btn-outline-danger">Delete</button></th>
+                <th><button (click)="onDeleteProduct(product.id)" type="submit"
+                    class="btn btn-sm btn-outline-danger">Delete</button></th>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+      <shared-paginator [paginator]="paginator" [url]="'/product/list-producto'"></shared-paginator>
     </div>
   </div>
 </ng-template>

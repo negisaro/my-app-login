@@ -21,4 +21,5 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedModule,
   ]
 })
+
 export class ProductModule { }

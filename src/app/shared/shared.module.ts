@@ -7,6 +7,7 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     HomePageComponent,
     NavbarComponent,
     SidebarComponent,
+    PaginatorComponent,
   ],
   imports: [
     CommonModule,
@@ -25,6 +27,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     HomePageComponent,
     NavbarComponent,
     SidebarComponent,
+    PaginatorComponent,
   ]
 })
 
