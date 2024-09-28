@@ -1,0 +1,46 @@
+<div *ngIf="propietarios.length === 0; else table" class="alert alert-warning text-center">
+  NO hay Propietarios que mostrar
+</div>
+
+<ng-template #table>
+  <div class="flex flex-col">
+    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+        <div class="overflow-hidden">
+          <table class="min-w-full text-center text-sm font-light text-surface dark:text-white" data-twe-spy="scroll"
+            data-twe-target="#scrollspy-collapsible" data-twe-offset="0">
+            <thead class="border-b border-neutral-200 bg-[#68829b] font-medium text-white dark:border-white/10">
+              <tr>
+                <th scope="col" class=" px-6 py-4 text-left">#</th>
+                <th scope="col" class=" px-6 py-4">Documento de Identidad</th>
+                <th scope="col" class=" px-6 py-4 text-left">Primer Nombre</th>
+                <th scope="col" class=" px-6 py-4 text-left">Segundo Nombre</th>
+                <th scope="col" class=" px-6 py-4 text-left">Primer Apellido</th>
+                <th scope="col" class=" px-6 py-4 text-left">Segundo Apellido</th>
+                <th scope="col" class=" px-6 py-4">Email</th>
+                <th scope="col" class=" px-6 py-4 text-left">Celular</th>
+                <th scope="col" class=" px-6 py-4">Direccion</th>
+                <th colspan="3" style="text-align: center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let propietario of propietarios; let i = index">
+              <tr class="border-b border-neutral-200 dark:border-white/10 text-dark">
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{i + 1}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{propietario.documento}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{propietario.primerNombre}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{propietario.segundoNombre}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{propietario.primerApellido}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{propietario.segundoApellido}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{propietario.email}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{propietario.telefono}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{propietario.direccion}}</td>
+                <th><button class="btn btn-sm btn-outline-success">Update</button></th>
+                <th><button (click)="onDeletePropietario(propietario.id)" type="submit" class="btn btn-sm btn-outline-danger">Delete</button></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

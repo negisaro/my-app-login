@@ -28,6 +28,10 @@ const routes: Routes = [
           import('../product/product.module').then((m) => m.ProductModule),
       },
       {
+        path: 'propietario',
+        loadChildren: () => import('../propietario/propietario.module').then(m => m.PropietarioModule)
+      },
+      {
         path: '**',
         redirectTo: 'home',
         pathMatch: 'full',
