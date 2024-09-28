@@ -32,8 +32,7 @@ export class AddProductComponent {
     if (this.currentProduct.id) {
       this.productService.updateProduct(this.currentProduct).subscribe({
         next: (product) => {
-          console.log(product);
-          this.router.navigate(['product/list-product']);
+          this.router.navigate(['/dashboard/product/list-product']);
         },
       });
       Swal.fire({
@@ -43,11 +42,10 @@ export class AddProductComponent {
       });
       return;
     }
-
     this.productService.addProduct(this.currentProduct).subscribe({
       next: (product) => {
         console.log(product);
-        this.router.navigate(['product/list-product']);
+        this.router.navigate(['/dashboard/product/list-product']);
       },
     });
     Swal.fire({

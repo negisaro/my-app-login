@@ -10,7 +10,6 @@ import Swal from 'sweetalert2';
   styleUrl: './list-propietario.component.css',
 })
 export class ListPropietarioComponent implements OnInit {
-
   propietarios: Propietario[] = [];
 
   constructor(
@@ -21,9 +20,8 @@ export class ListPropietarioComponent implements OnInit {
   ngOnInit(): void {
     this.propietarioService
       .getPropietario()
-      .subscribe((propietarios) => (this.propietarios = propietarios)
-    );
-      console.log(this.propietarios);
+      .subscribe((propietarios) => (this.propietarios = propietarios));
+    console.log(this.propietarios);
   }
 
   onDeletePropietario(id: number): void {
@@ -38,9 +36,15 @@ export class ListPropietarioComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.propietarioService.deletePropietarioById(id).subscribe(() => {
-          this.router.navigate(['/propietario/list-propietarios'], {
-            skipLocationChange: true,
-          });
+          this.router
+            .navigate(['/dashboard/propietario/list-propietarios'], {
+              skipLocationChange: true,
+            })
+            .then(() => {
+              this.router.navigate(['/dashboard/propietario/list-propietarios'], {
+                state: {},
+              });
+            });
         });
         Swal.fire({
           title: 'Eliminado!',

@@ -5,15 +5,8 @@
   </div>
   <div class="card-body">
     <form  [formGroup]="productForm" (ngSubmit)="onSubmit()">
-
-      <div>
-        <input class="form-control my-2" placeholder="id" name="id" formControlName="id">
-
-      </div>
-
       <div>
         <input class="form-control my-2" placeholder="Name" name="name" formControlName="name">
-
       </div>
       <div>
         <input class="form-control my-2" placeholder="Description" name="description" formControlName="description">
@@ -23,7 +16,6 @@
       </div>
       <div>
         <input type="number" class="form-control my-2" placeholder="Price" name="price" formControlName="price">
-
       </div>
       <div>
         <button type="submit" class="btn btn-sm btn-outline-primary mx-3">Guardar</button>
@@ -32,7 +24,5 @@
     </form>
   </div>
 </div>
-<pre>
-  {{currentProduct | json}}
-</pre>
+
 

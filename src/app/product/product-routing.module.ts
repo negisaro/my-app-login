@@ -10,9 +10,18 @@ const routes: Routes = [
     path: '',
     component: LayoutProductComponent,
   },
-  { path: 'list-product', component: ListProductComponent },
-  { path: 'add-product', component: AddProductComponent },
-  { path: '**', redirectTo: 'list-product' },
+  {
+    path: 'list-product',
+    component: ListProductComponent
+  },
+  {
+    path: 'add-product',
+    component: AddProductComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
+  }
 ];
 
 @NgModule({

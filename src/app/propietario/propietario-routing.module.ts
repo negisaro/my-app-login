@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes,  } from '@angular/router';
 
 import { LayoutPropietarioComponent } from './layouts/layout-propietario/layout-propietario.component';
@@ -19,17 +18,19 @@ const routes: Routes = [
     path: 'add-propietarios',
     component: AddPropietarioComponent,
   },
+  {
+    path: '**',
+    redirectTo: 'home',
+  }
 ];
-
-
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
     RouterModule.forChild(routes),
   ],
   exports: [
     RouterModule
   ]
 })
+
 export class PropietarioRoutingModule { }

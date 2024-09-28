@@ -10,18 +10,17 @@ import { SharingDataService } from '../../services/sharing-data.service';
   templateUrl: './list-product.component.html',
   styleUrl: './list-product.component.css',
 })
-export class ListProductComponent implements OnInit{
-
+export class ListProductComponent implements OnInit {
   products: Product[] = [];
   paginator: any = {};
 
   constructor(
     private productService: ProductService,
     private router: Router,
-    private sharingData: SharingDataService,) {}
+    private sharingData: SharingDataService
+  ) {}
 
   ngOnInit(): void {
-
     this.pageProductEvent();
     this.productService
       .getProduct()
@@ -47,9 +46,18 @@ export class ListProductComponent implements OnInit{
     }).then((result) => {
       if (result.isConfirmed) {
         this.productService.deleteProductById(id).subscribe(() => {
-          this.router.navigate(['/product/list-user'], {
-            skipLocationChange: true,
-          });
+          this.router
+            .navigate(['/dashboard/product/list-product'], {
+              skipLocationChange: true,
+            })
+            .then(() => {
+              this.router.navigate(['/dashboard/product/list-product'], {
+                state: {
+                  products: this.products,
+                  paginator: this.paginator,
+                },
+              });
+            });
         });
         Swal.fire({
           title: 'Eliminado!',
