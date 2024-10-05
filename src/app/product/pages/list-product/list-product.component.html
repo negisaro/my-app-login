@@ -11,6 +11,7 @@
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
         <div class="overflow-hidden">
+          <span class="text-4xl text-cyan-800 text-center font-medium leading-tight">Listado de Productos</span>
           <table class="min-w-full text-center text-sm font-light text-surface dark:text-white" data-twe-spy="scroll"
             data-twe-target="#scrollspy-collapsible" data-twe-offset="0">
             <thead class="border-b border-neutral-200 bg-[#68829b] font-medium text-white dark:border-white/10">
@@ -38,9 +39,7 @@
           </table>
         </div>
       </div>
-      <shared-paginator [paginator]="paginator" [url]="'/product/list-producto'"></shared-paginator>
     </div>
   </div>
+  <shared-paginator [paginator]="paginator" [url]="'/dashboard/product/list-product/page'"></shared-paginator>
 </ng-template>
-<shared-paginator [paginator]="paginator" [url]="'/product/page'"></shared-paginator>
-

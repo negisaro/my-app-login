@@ -1,30 +1,61 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { PropietarioService } from '../../services/propietario.service';
 import { Router } from '@angular/router';
 import { Propietario } from '../../interfaces/propietario.interface';
 import Swal from 'sweetalert2';
+import { Ripple, Input, initTWE } from 'tw-elements';
 
 @Component({
   selector: 'propietario-add-propietario',
   templateUrl: './add-propietario.component.html',
-  styleUrl: './add-propietario.component.css'
+  styleUrl: './add-propietario.component.css',
 })
-export class AddPropietarioComponent {
+export class AddPropietarioComponent implements OnInit {
 
-  public propietarioForm = new FormGroup({
-    id:                 new FormControl(0),
-    documento:          new FormControl(''),
-    primerNombre:       new FormControl(''),
-    segundoNombre:      new FormControl(''),
-    primerApellido:     new FormControl(''),
-    segundoApellido:    new FormControl(''),
-    email:              new FormControl(''),
-    telefono:           new FormControl(''),
-    direccion:          new FormControl(''),
+  private fb = inject(FormBuilder);
+  private vl = Validators;
+
+
+  ngOnInit(): void {
+    initTWE({ Ripple, Input });
+  }
+
+  public propietarioForm: FormGroup = this.fb.group({
+    id: [0],
+    documento: [
+      '',
+      [this.vl.required, this.vl.minLength(5), this.vl.maxLength(10)],
+    ],
+    primerNombre: ['', [this.vl.required]],
+    segundoNombre: [''],
+    primerApellido: ['', [this.vl.required]],
+    segundoApellido: [''],
+    email: [
+      '',
+      [
+        this.vl.required,
+        this.vl.pattern(
+          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        ),
+      ],
+    ],
+    telefono: [
+      '',
+      [
+        this.vl.required,
+        this.vl.maxLength(10),
+        this.vl.pattern(/^[3][0-9]{1,9}$/),
+      ],
+    ],
+    direccion: ['', [this.vl.required]],
+    ingreso: ['', [this.vl.required]],
   });
 
-  constructor(private propietarioService: PropietarioService, private router: Router) {}
+  constructor(
+    private propietarioService: PropietarioService,
+    private router: Router
+  ) {}
 
   get currentPropietario(): Propietario {
     const propietario = this.propietarioForm.value as Propietario;
@@ -32,32 +63,42 @@ export class AddPropietarioComponent {
   }
 
   onSubmit(): void {
-    if (this.propietarioForm.invalid) return;
-
-    if (this.currentPropietario.id) {
-      this.propietarioService.updatePropietario(this.currentPropietario).subscribe({
-        next: (propietario) => {
-          console.log(propietario);
-          this.router.navigate(['/dashboard/propietario/list-propietarios']);
-        },
-      });
+    if (this.propietarioForm.invalid) {
       Swal.fire({
-        title: 'Actualizado propietario!',
-        text: 'Propietario actualizado con exito!',
-        icon: 'success',
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debes diligenciar todos los campos!',
       });
       return;
     }
+
+    if (this.currentPropietario.id) {
+      this.propietarioService.updatePropietario(this.currentPropietario).subscribe({
+        next: () => {
+          this.router.navigateByUrl('/dashboard/propietario/list-propietarios'),
+            Swal.fire({
+              title: 'Actualizado propietario!',
+              text: 'Propietario actualizado con exito!',
+              icon: 'success',
+            });
+          return;
+        },
+      });
+    }
+
     this.propietarioService.addPropietario(this.currentPropietario).subscribe({
-      next: (propietario) => {
-        console.log(propietario);
-        this.router.navigate(['/dashboard/propietario/list-propietarios']);
+      next: () => {
+        this.router.navigateByUrl('/dashboard/propietario/list-propietarios'),
+          Swal.fire({
+            title: 'Nuevo propietario!',
+            text: 'Creado con exito!',
+            icon: 'success',
+          });
       },
     });
-    Swal.fire({
-      title: 'Creado nuevo propietario!',
-      text: 'Propietario creado con exito!',
-      icon: 'success',
-    });
+  }
+
+  onReset(): void {
+    this.propietarioForm.reset();
   }
 }

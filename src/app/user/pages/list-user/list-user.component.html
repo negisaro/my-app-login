@@ -2,7 +2,10 @@
   NO hay Usurios que mostrar
 </div>
 
+
 <ng-template #table>
+  <span class="text-4xl text-cyan-800 text-center font-medium leading-tight">Listado de Usuarios</span>
+  <hr class="text-light">
   <div class="flex flex-col">
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -27,11 +30,14 @@
                 <td class="whitespace-nowrap  px-6 py-4 text-center">{{user.username}}</td>
                 <td class="whitespace-nowrap  px-6 py-4 text-center">{{user.correoElectronico}}</td>
                 <th><button class="btn btn-sm btn-outline-success">Update</button></th>
-                <th><button (click)="onDeleteUser(user.id)" type="submit" class="btn btn-sm btn-outline-danger">Delete</button></th>
+                <th><button (click)="onDeleteUser(user.id)" type="submit"
+                    class="btn btn-sm btn-outline-danger">Delete</button></th>
               </tr>
             </tbody>
           </table>
         </div>
+        <shared-paginator [paginator]="paginator" [url]="'/dashboard/user/list-user/page'"></shared-paginator>
+
       </div>
     </div>
   </div>

@@ -1,42 +1,134 @@
-<div class="container">
-  <div class="card bg-light">
-    <!-- <div class="card-header">-->
-    <h3 class="text-secondary"></h3>
-  </div>
-  <div class="card-body">
+<section class="bg-white p-6 shadow-4 dark:bg-gray-900 mx-auto block max-w-lm rounded-lg">
+  <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+    <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Agregar Nuevo Propietario</h2>
     <form [formGroup]="propietarioForm" (ngSubmit)="onSubmit()">
-      <div>
-        <input class="form-control my-2" placeholder="Documento" name="documento" formControlName="documento">
-      </div>
-      <div>
-        <input class="form-control my-2" placeholder="Primer Nombre" name="primerNombre" formControlName="primerNombre">
-      </div>
-      <div>
-        <input class="form-control my-2" placeholder="Segundo Nombre" name="segundoNombre"
-          formControlName="segundoNombre">
-      </div>
-      <div>
-        <input class="form-control my-2" placeholder="Primer Apellido" name="primerApellido"
-          formControlName="primerApellido">
-      </div>
-      <div>
-        <input class="form-control my-2" placeholder="Segungo Apellido" name="segundoApellido"
-          formControlName="segundoApellido">
-      </div>
-      <div>
-        <input class="form-control my-2" placeholder="Email" name="email" formControlName="email">
-      </div>
-      <div>
-        <input class="form-control my-2" placeholder="Numero Celular" name="telefono" formControlName="telefono">
-      </div>
-      <div>
-        <input class="form-control my-2" placeholder="Dirección" name="direccion" formControlName="direccion">
-      </div>
+      <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+        <div class="sm:col-span-2">
+          <label for="documento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Documeto de
+            Identidad</label>
+          <input formControlName="documento" type="text" name="documento" id="documento"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+          <div *ngIf="propietarioForm.controls['documento'].invalid && (propietarioForm.controls['documento'].dirty
+             || propietarioForm.controls['documento'].touched)">
+            <small Class="form -text text-danger" *ngIf="propietarioForm.controls['documento'].errors?.['required']">
+              El documento es requerido.
+            </small>
+            <small Class="form -text text-danger" *ngIf="propietarioForm.controls['documento'].errors?.['minlength']">
+              Debe tener como mínimo 5 caracteres
+            </small>
+            <small Class="form -text text-danger" *ngIf="propietarioForm.controls['documento'].errors?.['maxlength']">
+              Debe tener como maximo 10 caracteres
+            </small>
+          </div>
+        </div>
 
-      <div>
-        <button type="submit" class="btn btn-sm btn-outline-primary mx-3">Guardar</button>
-        <button type="button" class="btn btn-sm btn-outline-success">Limpiar</button>
+        <div class="w-full">
+          <label for="primerNombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Primer
+            Nombre</label>
+          <input formControlName="primerNombre" type="text" name="primerNombre" id="primerNombre"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+          <div *ngIf="propietarioForm.controls['primerNombre'].invalid && (propietarioForm.controls['primerNombre'].dirty
+             || propietarioForm.controls['primerNombre'].touched)">
+            <small Class="form -text text-danger" *ngIf="propietarioForm.controls['primerNombre'].errors?.['required']">
+              El primer nombre es requerido.
+            </small>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <label for="segundoNombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Segundo
+            Nombre</label>
+          <input formControlName="segundoNombre" type="text" name="segundoNombre" id="segundoNombre"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+        </div>
+
+        <div class="w-full">
+          <label for="primerApellido" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Primer
+            Apellido</label>
+          <input formControlName="primerApellido" type="text" name="primerApellido" id="primerApellido"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+          <div *ngIf="propietarioForm.controls['primerApellido'].invalid && (propietarioForm.controls['primerApellido'].dirty
+            || propietarioForm.controls['primerApellido'].touched)">
+            <small Class="form -text text-danger"
+              *ngIf="propietarioForm.controls['primerApellido'].errors?.['required']">
+              El primer apellido es requerido.
+            </small>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <label for="segundoApellido" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Segundo
+            Apellido</label>
+          <input formControlName="segundoApellido" type="text" name="segundoApellido" id="segundoApellido"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+        </div>
+
+        <div class="w-full">
+          <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
+          <input formControlName="email" name="email" type="email" id="email"
+            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+            placeholder="name@flowbite.com">
+          <div *ngIf="propietarioForm.controls['email'].invalid && (propietarioForm.controls['email'].dirty
+            || propietarioForm.controls['email'].touched)">
+            <small Class="form -text text-danger" *ngIf="propietarioForm.controls['email'].errors?.['required']">
+              El email es requerido.
+            </small>
+            <small Class="form -text text-danger" *ngIf="propietarioForm.controls['email'].errors?.['pattern']">
+              El formato del email no es valido.
+            </small>
+          </div>
+
+        </div>
+        <div class="w-full">
+          <label for="ingreso" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Fecha de
+            Ingreso</label>
+          <input formControlName="ingreso" name="ingreso" type="date" id="ingreso"
+            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light">
+          <div *ngIf="propietarioForm.controls['ingreso'].invalid && (propietarioForm.controls['ingreso'].dirty
+            || propietarioForm.controls['ingreso'].touched)">
+            <small Class="form -text text-danger" *ngIf="propietarioForm.controls['ingreso'].errors?.['required']">
+              La fecha es requerida.
+            </small>
+          </div>
+        </div>
+        <div class="w-full">
+          <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Número
+            Celular</label>
+          <input formControlName="telefono" type="text" name="telefono" id="telefono"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+          <div *ngIf="propietarioForm.controls['telefono'].invalid && (propietarioForm.controls['telefono'].dirty
+            || propietarioForm.controls['telefono'].touched)">
+            <small Class="form -text text-danger" *ngIf="propietarioForm.controls['telefono'].errors?.['required']">
+              El número celular es requerido.
+            </small>
+            <small Class="form -text text-danger" *ngIf="propietarioForm.controls['telefono'].errors?.['pattern']">
+              El formato del número celular no es valido.
+            </small>
+            <small Class="form -text text-danger" *ngIf="propietarioForm.controls['telefono'].errors?.['maxlength']">
+              Maximo 10 caracteres
+            </small>
+          </div>
+        </div>
+        <div class="w-full">
+          <label for="direccion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dirección</label>
+          <input formControlName="direccion" type="text" name="direccion" id="direccion"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+          <div *ngIf="propietarioForm.controls['direccion'].invalid && (propietarioForm.controls['direccion'].dirty
+            || propietarioForm.controls['direccion'].touched)">
+            <small Class="form -text text-danger" *ngIf="propietarioForm.controls['direccion'].errors?.['required']">
+              La dirección es requerida.
+            </small>
+          </div>
+        </div>
       </div>
+      <button type="submit"
+        class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800 m-2">
+        Agregar
+      </button>
+      <button (click)="onReset()" type="reset"
+        class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+        Limpiar
+      </button>
     </form>
   </div>
-</div>
+</section>

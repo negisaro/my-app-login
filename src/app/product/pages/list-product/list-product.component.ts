@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../interfaces/product.interface';
 import { ProductService } from '../../services/product.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { SharingDataService } from '../../services/sharing-data.service';
 
@@ -17,7 +17,8 @@ export class ListProductComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private router: Router,
-    private sharingData: SharingDataService
+    private sharingData: SharingDataService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -28,9 +29,13 @@ export class ListProductComponent implements OnInit {
   }
 
   pageProductEvent() {
-    this.sharingData.pageProductEventEmitter.subscribe((pageable) => {
-      this.products = pageable.products;
-      this.paginator = pageable.paginator;
+    this.route.paramMap.subscribe((params) => {
+      const page = +(params.get('page') || '0');
+      console.log(page);
+      this.productService.getPageable(page).subscribe((pageable) => {
+        this.paginator = pageable;
+      
+      });
     });
   }
 

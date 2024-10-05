@@ -1,5 +1,5 @@
-export interface Propietario {
 
+export interface Propietario {
   id:                 number;
   documento:          string;
   primerNombre:       string;
@@ -9,4 +9,15 @@ export interface Propietario {
   email:              string;
   telefono:           string;
   direccion:          string;
+  ingreso:            Date;
+  vehiculos:          Vehiculo[];
+}
+export interface Vehiculo {
+id:               number;
+placa:            string;
+marca:            string;
+modeloAnio:       Date;
+modeloCarroceria: string;
+tipoCombustible:  string;
+propietario:      Propietario;
 }

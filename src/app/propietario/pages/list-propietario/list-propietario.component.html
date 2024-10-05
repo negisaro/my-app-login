@@ -6,6 +6,7 @@
   <div class="flex flex-col">
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+        <span class="text-4xl text-cyan-800 text-center font-medium leading-tight">Listado de Propietarios</span>
         <div class="overflow-hidden">
           <table class="min-w-full text-center text-sm font-light text-surface dark:text-white" data-twe-spy="scroll"
             data-twe-target="#scrollspy-collapsible" data-twe-offset="0">
@@ -40,6 +41,7 @@
             </tbody>
           </table>
         </div>
+        <shared-paginator [paginator]="paginator" [url]="'/dashboard/propietario/list-propietarios/page'"></shared-paginator>
       </div>
     </div>
   </div>

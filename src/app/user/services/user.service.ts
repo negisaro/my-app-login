@@ -17,6 +17,10 @@ export class UserService {
     return this.http.get<User[]>(`${this.baseUrl}/api/users`)
   }
 
+  getPageable(page: number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/api/users/page/${page}`);
+  }
+
   addUser(user: User): Observable<User> {
     return this.http.post<User>(`${this.baseUrl}/api/users/register`, user);
   }

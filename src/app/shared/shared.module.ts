@@ -4,19 +4,21 @@ import { RouterModule } from '@angular/router';
 
 
 import { AboutPageComponent } from './pages/about-page/about-page.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 
 @NgModule({
   declarations: [
     AboutPageComponent,
+    FooterComponent,
     HomePageComponent,
     NavbarComponent,
-    SidebarComponent,
     PaginatorComponent,
+    SidebarComponent,
   ],
   imports: [
     CommonModule,
@@ -24,10 +26,11 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
   ],
   exports: [
     AboutPageComponent,
+    FooterComponent,
     HomePageComponent,
     NavbarComponent,
-    SidebarComponent,
     PaginatorComponent,
+    SidebarComponent,
   ]
 })
 

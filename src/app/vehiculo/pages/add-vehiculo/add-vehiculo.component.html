@@ -1,0 +1,80 @@
+<section class="bg-white dark:bg-gray-900">
+  <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+    <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Agregar Nuevo Vehiculo</h2>
+    <form [formGroup]="vehiculoForm" (ngSubmit)="onSubmit()" autocomplete="off">
+      <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+        <div class="w-full">
+          <label for="placa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Placa</label>
+          <input formControlName="placa" type="text" name="placa" id="placa"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="placa" required>
+          <div *ngIf="vehiculoForm.controls['placa'].invalid && (vehiculoForm.controls['placa'].dirty
+             || vehiculoForm.controls['placa'].touched)" class="alert alert-danger">
+            <small *ngIf="vehiculoForm.controls['placa'].errors">
+              la placa es requerida.
+            </small>
+          </div>
+        </div>
+        <div class="w-full">
+          <label for="marca" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Marca</label>
+          <input formControlName="marca" type="text" name="marca" id="marca"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="marca" required="EL CAMPO ES REQUERIDO">
+        </div>
+        <div class="w-full">
+          <label for="modeloCarroceria" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo
+            Carroceria</label>
+          <input formControlName="modeloCarroceria" type="text" name="modeloCarroceria" id="modeloCarroceria"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="tipo carroceria" required="">
+        </div>
+        <div class="w-full">
+          <label for="tipoCombustible" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de
+            Combustible</label>
+          <input formControlName="tipoCombustible" type="text" name="tipoCombustible" id="tipoCombustible"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="tipo combustible" required="">
+        </div>
+        <div class="sm:col-span-2">
+          <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Propietario
+            Vehiculo</label>
+          <select formControlName="propietario" name="propietario" id="propietario"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+            <option value="0">Seleccione el Propietario</option>
+            <option *ngFor="let propietario of propietarios" [ngValue]="propietario.id">{{propietario.primerNombre}}{{'
+              '}}{{propietario.primerApellido}}</option>
+          </select>
+        </div>
+        <div class="relative sm:col-span-2">
+
+          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+            </svg>
+          </div>
+          <input formControlName="modeloAnio" name="modeloAnio" id="datepicker-custom" datepicker datepicker-autohide
+            type="text"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Seleccione el modelo del carro">
+        </div>
+      </div>
+      <button type="submit" [disabled]="vehiculoForm.invalid"
+        class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+        Agregar Vehiculo
+      </button>
+      <div class="container-login100-form-btn">
+        <div class="wrap-login100-form-btn">
+          <div class="login100-form-bgbtn"></div>
+          <button class="login100-form-btn" [disabled]="vehiculoForm.invalid" type="submit">
+            Login
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+<pre>
+  {{currentVehiculo | json}}
+</pre>

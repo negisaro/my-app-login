@@ -16,6 +16,10 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.baseUrl}/api/products`);
   }
 
+  getPageable(page: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/api/products/page/${page}`);
+  }
+
   addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(`${this.baseUrl}/api/products/create`, product);
   }
