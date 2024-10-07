@@ -72,7 +72,7 @@ export class ListPropietarioComponent implements OnInit {
         const page = +(params.get('page') || '0');
         console.log(page);
         this.propietarioService.getPageable(page).subscribe((pageable) => {
-          this.propietarios = pageable as Propietario[];
+          this.propietarios = pageable;
           this.paginator = pageable;
           console.log(pageable)
           this._pageProductEventEmitter.emit({

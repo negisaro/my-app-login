@@ -82,3 +82,38 @@
     </div>
   </div>
 }
+
+<nav >
+  <ul class="pagination pagination-sm justify-content-center">
+    <li class="page-item" class="${pageRender.first ? 'page-item disabled' : 'page-item'}">
+      <span class="page-link" *ngIf ="(paginator.first)">&laquo;</span>
+      <a class="page-link" *ngIf="(!paginator.first)" [routerLink]="[url, 0]">&laquo;</a>
+    </li>
+
+    <li class="page-item" class="${not pageRender.hasPrevious ? 'page-item disabled' : 'page-item'}">
+      <span class="page-link" *ngif="(!paginator.hasPrevious)">anterior</span>
+      <a class="page-link" *ngIf="(paginator.hasPrevious)"
+       [routerLink]="[url, paginator.number-1]"
+
+      th:href="@{${pageRender.url}(pag=${pageRender.paginaActual - 2})}">anterior</a>
+    </li>
+
+    <li class="page-item" th:each="item : ${pageRender.paginas}" th:class="${item.actual ? 'page-item active' : 'page-item'}">
+      <span class="page-link" th:if="${item.actual}" th:text="${item.numero}"></span>
+      <a class="page-link" th:href="@{${pageRender.url}(pag=${item.numero - 1})}"
+        th:if="${not item.actual}" th:text="${item.numero}"></a>
+    </li>
+
+    <li class="page-item" class="${not pageRender.hasNext ? 'page-item disabled' : 'page-item'}">
+      <span class="page-link" *ngIf="(!paginator.hasNext)">siguiente</span>
+      <a class="page-link" *ngIf="(paginator.hasNext)"
+      [routerLink]="[url, paginator.number+1]"
+      th:href="@{${pageRender.url}(pag=${pageRender.paginaActual})}">siguiente</a>
+    </li>
+
+    <li class="page-item" th:class="${pageRender.last ? 'page-item disabled' : 'page-item'}">
+      <span class="page-link" th:if="${pageRender.last}">&raquo;</span>
+      <a class="page-link" th:if="${not pageRender.last}" th:href="@{${pageRender.url}(pag=${pageRender.totalPaginas - 1})}">&raquo;</a>
+    </li>
+  </ul>
+</nav>

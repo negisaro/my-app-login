@@ -16,21 +16,18 @@ export class AddPropietarioComponent implements OnInit {
   private fb = inject(FormBuilder);
   private vl = Validators;
 
-
   ngOnInit(): void {
     initTWE({ Ripple, Input });
   }
 
   public propietarioForm: FormGroup = this.fb.group({
-    id: [0],
-    documento: [
-      '',
-      [this.vl.required, this.vl.minLength(5), this.vl.maxLength(10)],
-    ],
-    primerNombre: ['', [this.vl.required]],
-    segundoNombre: [''],
-    primerApellido: ['', [this.vl.required]],
-    segundoApellido: [''],
+
+    id:               [0],
+    documento:        ['', [this.vl.required, this.vl.minLength(5), this.vl.maxLength(10)],],
+    primerNombre:     ['', [this.vl.required]],
+    segundoNombre:    [''],
+    primerApellido:   ['', [this.vl.required]],
+    segundoApellido:  [''],
     email: [
       '',
       [
@@ -40,16 +37,9 @@ export class AddPropietarioComponent implements OnInit {
         ),
       ],
     ],
-    telefono: [
-      '',
-      [
-        this.vl.required,
-        this.vl.maxLength(10),
-        this.vl.pattern(/^[3][0-9]{1,9}$/),
-      ],
-    ],
-    direccion: ['', [this.vl.required]],
-    ingreso: ['', [this.vl.required]],
+    telefono:       ['', [this.vl.required, this.vl.maxLength(10), this.vl.pattern(/^[3][0-9]{1,9}$/),],],
+    direccion:      ['', [this.vl.required]],
+    ingreso:        ['', [this.vl.required]],
   });
 
   constructor(
@@ -63,6 +53,7 @@ export class AddPropietarioComponent implements OnInit {
   }
 
   onSubmit(): void {
+    
     if (this.propietarioForm.invalid) {
       Swal.fire({
         icon: 'error',

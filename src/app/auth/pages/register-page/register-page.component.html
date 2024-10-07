@@ -8,30 +8,66 @@
     <span class="label-input100">Nombres</span>
     <input class="input100" type="text" formControlName="name" placeholder="Nombres">
     <span class="focus-input100"></span>
+    <div *ngIf="myForm.controls['name'].invalid && (myForm.controls['name'].dirty
+             || myForm.controls['name'].touched)">
+      <p *ngIf="myForm.controls['name'].errors?.['required']" class="mt-2 text-sm text-red-600 dark:text-red-500">
+        <span class="font-medium">Oops!</span> El nombre es requerido!
+      </p>
+    </div>
   </div>
 
   <div class="wrap-input100 m-b-23">
     <span class="label-input100">Apellidos</span>
     <input class="input100" type="text" formControlName="lastName" placeholder="Apellidos">
     <span class="focus-input100"></span>
+    <div *ngIf="myForm.controls['lastName'].invalid && (myForm.controls['lastName'].dirty
+             || myForm.controls['lastName'].touched)">
+      <p *ngIf="myForm.controls['lastName'].errors?.['required']" class="mt-2 text-sm text-red-600 dark:text-red-500">
+        <span class="font-medium">Oops!</span> El apellido es requerido!
+      </p>
+    </div>
   </div>
 
   <div class="wrap-input100 m-b-23">
     <span class="label-input100">Username</span>
     <input class="input100" type="text" formControlName="username" placeholder="Username">
     <span class="focus-input100"></span>
+    <div *ngIf="myForm.controls['username'].invalid && (myForm.controls['username'].dirty
+             || myForm.controls['username'].touched)">
+      <p *ngIf="myForm.controls['username'].errors?.['required']" class="mt-2 text-sm text-red-600 dark:text-red-500">
+        <span class="font-medium">Oops!</span> El usuario es requerido!
+      </p>
+    </div>
   </div>
 
   <div class="wrap-input100 m-b-23">
     <span class="label-input100">Email</span>
     <input class="input100" type="email" formControlName="correoElectronico" placeholder="Email">
     <span class="focus-input100"></span>
+    <div *ngIf="myForm.controls['correoElectronico'].invalid && (myForm.controls['correoElectronico'].dirty
+    || myForm.controls['correoElectronico'].touched)">
+      <small Class="form -text text-danger" *ngIf="myForm.controls['correoElectronico'].errors?.['required']">
+        El email es requerido.
+      </small>
+      <small Class="form -text text-danger" *ngIf="myForm.controls['correoElectronico'].errors?.['pattern']">
+        El formato del email no es valido.
+      </small>
+    </div>
   </div>
 
   <div class="wrap-input100">
     <span class="label-input100">Contraseña</span>
     <input class="input100" type="password" formControlName="password" placeholder="Ingrese su contraseña">
     <span class="focus-input100"></span>
+    <div *ngIf="myForm.controls['password'].invalid && (myForm.controls['password'].dirty
+    || myForm.controls['password'].touched)">
+      <small Class="form -text text-danger" *ngIf="myForm.controls['password'].errors?.['required']">
+        El password es requerido.
+      </small>
+      <small Class="form -text text-danger" *ngIf="myForm.controls['password'].errors?.['pattern']">
+        El formato del password no es valido. (8-16 digitos, mayusculas, minusculas, digitos, simbolos alfanumericos)
+      </small>
+    </div>
   </div>
 
   <div class="text-right p-t-8 p-b-31"></div>
@@ -55,6 +91,3 @@
     </a>
   </div>
 </form>
-<pre>
-  {{currentUser | json}}
-</pre>

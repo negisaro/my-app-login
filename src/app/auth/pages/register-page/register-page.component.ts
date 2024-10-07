@@ -19,14 +19,23 @@ export class RegisterPageComponent {
 
   private fb = inject(FormBuilder);
   private router      = inject( Router )
+  private vl = Validators;
 
   public myForm: FormGroup = this.fb.group({
-    id:                   new FormControl(0),
-    name:                 new FormControl(''),
-    lastName:             new FormControl(''),
-    username:             new FormControl(''),
-    correoElectronico:    new FormControl(''),
-    password:             new FormControl(''),
+    id:                  [0],
+    name:                ['', [this.vl.required]],
+    lastName:            ['', [this.vl.required]],
+    username:            ['', [this.vl.required]],
+    correoElectronico:   [
+      '',
+      [
+        this.vl.required,
+        this.vl.pattern(
+          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        ),
+      ],
+    ],
+    password:             ['', [this.vl.required, this.vl.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$!%*?&@#])([A-Za-z\d$!%*?&@#]|[^ ]){8,16}$/)]],
   });
 
   constructor(private userService: UserService) {}
@@ -71,7 +80,7 @@ export class RegisterPageComponent {
           });
           console.log(err.error);
           console.log(err.status);
-          
+
         },
       });
 

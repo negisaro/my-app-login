@@ -17,8 +17,8 @@ export class PropietarioService {
     return this.http.get<Propietario[]>(`${this.baseUrl}/api/propietarios`)
   }
 
-  getPageable(page: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/api/propietarios/page/${page}`);
+  getPageable(page: number): Observable<Propietario[]> {
+    return this.http.get<Propietario[]>(`${this.baseUrl}/api/propietarios/page/${page}`);
   }
 
   addPropietario(propietario: Propietario): Observable<Propietario> {

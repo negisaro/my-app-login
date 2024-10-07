@@ -1,8 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Datepicker } from 'flowbite';
-import type { DatepickerOptions, DatepickerInterface } from 'flowbite';
-import type { InstanceOptions } from 'flowbite';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { VehiculoService } from '../../services/vehiculo.service';
 import { Router } from '@angular/router';
 import { Propietario, Vehiculo } from '../../interfaces/vehiculo.interface';
@@ -15,20 +16,22 @@ import { PropietarioService } from '../../../propietario/services/propietario.se
   styleUrl: './add-vehiculo.component.css',
 })
 export class AddVehiculoComponent implements OnInit {
-  
-  private fb = inject( FormBuilder );
+
+  private fb = inject(FormBuilder);
   propietarios: Propietario[] = [];
-  datepicker: any;
+  private vl = Validators;
+  errores: string[] = [];
+
 
   public vehiculoForm: FormGroup = this.fb.group({
 
-    id:               [0, [Validators.required]],
-    placa:            ['', [Validators.required]],
-    marca:            ['', [Validators.required]],
-    modeloAnio:       ['', [Validators.required]],
-    modeloCarroceria: ['', [Validators.required]],
-    tipoCombustible:  ['', [Validators.required]],
-    propietario:      ['', [Validators.required]],
+    id:                 [0],
+    placa:              ['', [this.vl.required, this.vl.minLength(6)]],
+    marca:              ['', [this.vl.required]],
+    modeloAnio:         ['', [this.vl.required]],
+    modeloCarroceria:   ['', [this.vl.required]],
+    tipoCombustible:    ['', [this.vl.required]],
+    propietario:        ['', [this.vl.required]],
   });
 
   constructor(
@@ -37,100 +40,73 @@ export class AddVehiculoComponent implements OnInit {
     private router: Router
   ) {}
 
-   dataVehiculos(): void {
-    this.propietarioService.getPropietario().subscribe((propietarios) => (this.propietarios = propietarios));
-    console.log(this.propietarios);
+  dataVehiculos(): void {
+    this.propietarioService
+      .getPropietario()
+      .subscribe((propietarios) => (this.propietarios = propietarios));
   }
 
   get currentVehiculo(): Vehiculo {
     const vehiculo = this.vehiculoForm.value as Vehiculo;
     return vehiculo;
-
   }
 
   onSubmit(): void {
-    if (this.vehiculoForm.invalid) return;
+    console.log('inicioo onSumit')
 
-    if (this.currentVehiculo.id) {
-      this.vehiculoService.updateVehiculo(this.currentVehiculo).subscribe({
-        next: (vehiculo) => {
-          console.log(vehiculo);
-          this.router.navigate(['/dashboard/vehiculo/list-vehiculos']);
-        },
-      });
+    if (this.vehiculoForm.invalid) {
       Swal.fire({
-        title: 'Actualizado vehiculo!',
-        text: 'Vehiculo actualizado con exito!',
-        icon: 'success',
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debes diligenciar todos los campos!',
       });
       return;
     }
+
+    if (this.currentVehiculo.id) {
+      console.log('update onSumit')
+
+      this.vehiculoService.updateVehiculo(this.currentVehiculo).subscribe({
+        next: (vehiculo) => {
+          console.log(vehiculo);
+          this.router.navigateByUrl('/dashboard/vehiculo/list-vehiculos'),
+          Swal.fire({
+            title: 'Actualizado vehiculo!',
+            text: 'Vehiculo actualizado con exito!',
+            icon: 'success',
+          });
+          return;
+        },
+      });
+    }
+
+
     this.vehiculoService.addVehiculo(this.currentVehiculo).subscribe({
       next: (vehiculo) => {
         console.log(vehiculo);
-        this.router.navigate(['/dashboard/vehiculo/list-vehiculos']);
+        this.router.navigateByUrl('/dashboard/vehiculo/list-vehiculos'),
+        Swal.fire({
+          title: 'Creado nuevo vehiculo!',
+          text: 'Vehiculo creado con exito!',
+          icon: 'success',
+        });
+        (errors: { error: { errors: string[]; }; status: string; }) => {
+          this.errores = errors.error.errors as string[];
+          console.error('Código del error desde el backend: ' + errors.status);
+          console.error(errors.error.errors);
+          console.log(errors);
+        }
       },
     });
-    Swal.fire({
-      title: 'Creado nuevo vehiculo!',
-      text: 'Vehiculo creado con exito!',
-      icon: 'success',
-    });
+    console.log('despues de aadd onSumit')
   }
 
   ngOnInit(): void {
     this.dataVehiculos();
-    // set the target element of the input field or div
-    const $datepickerEl: HTMLInputElement = document.getElementById(
-      'datepicker-custom'
-    ) as HTMLInputElement;
+  }
 
-    // optional options with default values and callback functions
-    const options: DatepickerOptions = {
-      defaultDatepickerId: null,
-      autohide: true,
-      format: 'yyyy-mm-dd',
-      maxDate: null,
-      minDate: null,
-      orientation: 'bottom',
-      buttons: false,
-      autoSelectToday: 0,
-      title: 'Año Modelo',
-      rangePicker: false,
-      onShow: () => {},
-      onHide: () => {},
-    };
-
-    // instance options object
-    const instanceOptions: InstanceOptions = {
-      id: 'datepicker-custom-example',
-      override: true,
-    };
-
-    /*
-     * $datepickerEl: required
-     * options: optional
-     * instanceOptions: optional
-     */
-    const datepicker: DatepickerInterface = new Datepicker(
-      $datepickerEl,
-      options,
-      instanceOptions
-    );
-
-    // get the currently selected date (undefined if not selected)
-    this.datepicker.getDate();
-
-    // set the date (or dates if date range picker)
-    this.datepicker.setDate('05/31/2024');
-
-    // programatically show the datepicker
-    this.datepicker.show();
-
-    // programatically hide the datepicker
-    this.datepicker.hide();
-
-    // use this method to get the parent datepicker instance from https://mymth.github.io/vanillajs-datepicker/#/
-    this.datepicker.getDatepickerInstance();
+  onReset(): void {
+    this.vehiculoForm.reset();
   }
 }
+

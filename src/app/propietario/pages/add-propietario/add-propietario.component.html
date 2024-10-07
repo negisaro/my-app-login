@@ -29,9 +29,10 @@
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
           <div *ngIf="propietarioForm.controls['primerNombre'].invalid && (propietarioForm.controls['primerNombre'].dirty
              || propietarioForm.controls['primerNombre'].touched)">
-            <small Class="form -text text-danger" *ngIf="propietarioForm.controls['primerNombre'].errors?.['required']">
-              El primer nombre es requerido.
-            </small>
+            <p *ngIf="propietarioForm.controls['primerNombre'].errors?.['required']"
+              class="mt-2 text-sm text-red-600 dark:text-red-500">
+              <span class="font-medium">Oops!</span> El primer nombre es requerido!
+            </p>
           </div>
         </div>
 
@@ -64,21 +65,34 @@
         </div>
 
         <div class="w-full">
-          <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-          <input formControlName="email" name="email" type="email" id="email"
-            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-            placeholder="name@flowbite.com">
-          <div *ngIf="propietarioForm.controls['email'].invalid && (propietarioForm.controls['email'].dirty
-            || propietarioForm.controls['email'].touched)">
-            <small Class="form -text text-danger" *ngIf="propietarioForm.controls['email'].errors?.['required']">
-              El email es requerido.
-            </small>
-            <small Class="form -text text-danger" *ngIf="propietarioForm.controls['email'].errors?.['pattern']">
-              El formato del email no es valido.
-            </small>
+          <label for="email-address-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Email</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
+                <path
+                  d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
+              </svg>
+            </div>
+            <input formControlName="email" name="email" type="email" id="email"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="name@flowbite.com">
+
+            <div *ngIf="propietarioForm.controls['email'].invalid && (propietarioForm.controls['email'].dirty
+              || propietarioForm.controls['email'].touched)">
+              <small Class="form -text text-danger" *ngIf="propietarioForm.controls['email'].errors?.['required']">
+                El email es requerido.
+              </small>
+              <small Class="form -text text-danger" *ngIf="propietarioForm.controls['email'].errors?.['pattern']">
+                El formato del email no es valido.
+              </small>
+            </div>
           </div>
 
         </div>
+
         <div class="w-full">
           <label for="ingreso" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Fecha de
             Ingreso</label>
@@ -91,6 +105,7 @@
             </small>
           </div>
         </div>
+
         <div class="w-full">
           <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Número
             Celular</label>
@@ -121,14 +136,18 @@
           </div>
         </div>
       </div>
-      <button type="submit"
-        class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800 m-2">
-        Agregar
-      </button>
-      <button (click)="onReset()" type="reset"
-        class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-        Limpiar
-      </button>
+
+      <div class="d-flex justify-content-between">
+        <button type="submit"
+          class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800 m-2">
+          Agregar
+        </button>
+        <button (click)="onReset()" type="reset"
+          class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+          Limpiar
+        </button>
+      </div>
+      
     </form>
   </div>
 </section>
