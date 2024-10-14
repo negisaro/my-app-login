@@ -58,13 +58,16 @@
           </div>
         </div>
 
-        <div class="sm:col-span-2">
-          <label for="propietario" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Propietario
+
+        <div formGroupName="propietario" class="sm:col-span-2">
+          <h4>Propiearios</h4>
+          <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Propietario
             Vehiculo</label>
-          <select formControlName="propietario" name="propietario" id="propietario"
+          <select formControlName="id" name="id" id="id"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
             <option [selected] [ngValue]="0">Seleccione el Propietario</option>
-            <option *ngFor="let propietario of propietarios" [ngValue]="propietario.id">{{propietario.primerNombre}}{{'
+            <option *ngFor="let propietario of propietarios" [ngValue]="propietario.id">
+              {{propietario.primerNombre}}{{'
               '}}{{propietario.primerApellido}}</option>
           </select>
           <div *ngIf="vehiculoForm.controls['propietario'].invalid && (vehiculoForm.controls['propietario'].dirty
@@ -75,6 +78,9 @@
             </p>
           </div>
         </div>
+
+
+
 
         <div class="w-full">
           <label for="modeloAnio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Fecha de

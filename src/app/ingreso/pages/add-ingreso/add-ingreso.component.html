@@ -1,0 +1,87 @@
+<section class="bg-white p-6 shadow-4 dark:bg-gray-900 mx-auto block max-w-lm rounded-lg">
+  <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+    <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Agregar Nuevo Ingreso</h2>
+    <form [formGroup]="ingresoForm" (ngSubmit)="onSubmit()">
+      <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+
+        <div class="w-full">
+          <label for="fechaIngreso" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Fecha de
+            Ingreso</label>
+          <input formControlName="fechaIngreso" name="fechaIngreso" type="date" id="fechaIngreso"
+            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light">
+          <div *ngIf="ingresoForm.controls['fechaIngreso'].invalid && (ingresoForm.controls['fechaIngreso'].dirty
+            || ingresoForm.controls['fechaIngreso'].touched)">
+            <small Class="form -text text-danger" *ngIf="ingresoForm.controls['fechaIngreso'].errors?.['required']">
+              La fecha es requerida.
+            </small>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <label for="producidoDiario"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Producido</label>
+          <input formControlName="producidoDiario" type="number" name="producidoDiario" id="producidoDiario"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="0">
+          <div *ngIf="ingresoForm.controls['producidoDiario'].invalid && (ingresoForm.controls['producidoDiario'].dirty
+             || ingresoForm.controls['producidoDiario'].touched)">
+            <p *ngIf="ingresoForm.controls['producidoDiario'].errors?.['required']"
+              class="mt-2 text-sm text-red-600 dark:text-red-500">
+              <span class="font-medium">Oops!</span> El precio es requerido!
+            </p>
+            <p *ngIf="ingresoForm.controls['producidoDiario'].errors?.['pattern']"
+              class="mt-2 text-sm text-red-600 dark:text-red-500">
+              <span class="font-medium">Oops!</span> Debes ingresar solo números!
+            </p>
+          </div>
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="descripcion"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
+          <textarea formControlName="descripcion" name="descripcion" id="descripcion" rows="5"
+            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="Descripción del producto"></textarea>
+          <div *ngIf="ingresoForm.controls['descripcion'].invalid && (ingresoForm.controls['descripcion'].dirty
+            || ingresoForm.controls['descripcion'].touched)">
+            <p *ngIf="ingresoForm.controls['descripcion'].errors?.['required']"
+              class="mt-2 text-sm text-red-600 dark:text-red-500">
+              <span class="font-medium">Oops!</span>La descripción del ingreso es requerida!
+            </p>
+          </div>
+        </div>
+
+        <div formGroupName="vehiculos" class="sm:col-span-2">
+          <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Vehiculo</label>
+          <select formControlName="id" name="id" id="id"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+            <option [selected] [ngValue]="0">Seleccione el Vehiculo</option>
+            <option *ngFor="let vehiculo of vehiculos" [ngValue]="vehiculo.id">{{vehiculo.placa}}</option>
+          </select>
+          <div *ngIf="ingresoForm.controls['id'].invalid && (ingresoForm.controls['id'].dirty
+            || ingresoForm.controls['id'].touched)">
+            <p *ngIf="ingresoForm.controls['id'].errors?.['required']"
+              class="mt-2 text-sm text-red-600 dark:text-red-500">
+              <span class="font-medium">Oops!</span> El vehiculo es requerido!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <button type="submit"
+          class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800 m-2">
+          Agregar
+        </button>
+        <button (click)="onReset()" type="reset"
+          class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+          Limpiar
+        </button>
+      </div>
+
+    </form>
+  </div>
+</section>
+<pre>
+  {{ currentIngreso | json}}
+</pre>

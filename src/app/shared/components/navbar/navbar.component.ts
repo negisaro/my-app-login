@@ -1,19 +1,22 @@
-import {
-  Component,
-  computed,
-  ElementRef,
-  inject,
-  ViewChild,
-} from '@angular/core';
+import { Component, computed, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
 import { createPopper } from '@popperjs/core';
+import { Dropdown, Collapse, initTWE } from 'tw-elements';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'shared-navbar',
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
-export class NavbarComponent {
+
+export class NavbarComponent implements OnInit{
+
+  ngOnInit(): void {
+    initTWE({ Collapse, Dropdown });
+    initFlowbite();
+  }
+
   private authService = inject(AuthService);
   public user = computed(() => this.authService.currentUser());
   onLogout() {
@@ -50,7 +53,7 @@ export class NavbarComponent {
 
   @ViewChild('popoverDropdownPropietariosRef', { static: false })
   popoverDropdownPropietariosRef!: ElementRef;
-  
+
   ngAfterViewPropietariosInit() {
     createPopper(
       this.btnDropdownPropietariosRef.nativeElement,
