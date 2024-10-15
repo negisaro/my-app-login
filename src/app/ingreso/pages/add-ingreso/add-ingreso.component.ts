@@ -30,7 +30,7 @@ export class AddIngresoComponent implements OnInit {
     producidoDiario:   [0, [this.vl.required, this.vl.pattern(/^[0-9]*$/)]],
     descripcion:       ['', [this.vl.required]],
 
-    vehiculos: this.fb.group({
+    vehiculo: this.fb.group({
       id:             [0, [this.vl.required]],
     }),
   });
@@ -53,7 +53,6 @@ export class AddIngresoComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('inicioo onSumit');
 
     if (this.ingresoForm.invalid) {
       Swal.fire({
@@ -65,7 +64,6 @@ export class AddIngresoComponent implements OnInit {
     }
 
     if (this.currentIngreso.id) {
-      console.log('update onSumit');
 
       this.ingresoService.updateIngreso(this.currentIngreso).subscribe({
         next: (ingresos) => {
@@ -86,13 +84,13 @@ export class AddIngresoComponent implements OnInit {
         console.log(ingresos);
         this.router.navigateByUrl('/dashboard/ingreso/list-ingresos'),
           Swal.fire({
-            title: 'Creado nuevo ingreso!',
-            text: 'Ingreso creado con exito!',
+            title: 'Nuevo ingreso!',
+            text: 'Creado con exito!',
             icon: 'success',
           });
       },
     });
-    console.log('despues de aadd onSumit');
+
   }
 
   onReset(): void {

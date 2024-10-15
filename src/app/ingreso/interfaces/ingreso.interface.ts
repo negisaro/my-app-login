@@ -3,7 +3,7 @@ export interface Ingreso {
   fechaIngreso: Date;
   producidoDiario: number;
   descripcion: string;
-  vehiculos: Vehiculo;
+  vehiculo: Vehiculo;
 }
 
 export interface Vehiculo {
@@ -14,7 +14,6 @@ export interface Vehiculo {
   modeloCarroceria: string;
   tipoCombustible: string;
   propietario: Propietario;
-  ingresos: Ingreso[];
 }
 
 export interface Propietario {

@@ -3,11 +3,12 @@
 </div>
 
 <ng-template #table>
-  <span class="text-4xl text-cyan-800 text-center font-medium leading-tight">Listado de Ingresos</span>
   <div class="flex flex-col">
-
+    <span class="text-4xl text-cyan-800 text-center font-medium leading-tight">Listado de Ingresos</span>
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+        <button routerLink="/dashboard/ingreso/add-ingresos" class="btn btn-lm btn-outline-primary m-2">Nuevo
+          Ingreso</button>
         <div class="overflow-hidden">
           <table class="min-w-full text-center text-sm font-light text-surface dark:text-white" data-twe-spy="scroll"
             data-twe-target="#scrollspy-collapsible" data-twe-offset="0">
@@ -19,7 +20,7 @@
                 <th scope="col" class=" px-6 py-4 text-left">Descripción</th>
                 <th scope="col" class=" px-6 py-4 text-left">Placa Carro</th>
                 <th scope="col" class=" px-6 py-4 text-left">Propietario</th>
-                <th colspan="3" style="text-align: center">Acciones</th>
+                <th colspan="2" style="text-align: center">Acciones</th>
               </tr>
             </thead>
             <tbody *ngFor="let ingreso of ingresos; let i = index ">
@@ -28,8 +29,8 @@
                 <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.fechaIngreso}}</td>
                 <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.producidoDiario | number}}</td>
                 <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.descripcion}}</td>
-                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.vehiculos.placa}}</td>
-                <!--<td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.vehiculos.propietario.primerNombre}}</td>-->
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.vehiculo.placa}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.vehiculo.propietario.primerNombre}}{{''}}{{ingreso.vehiculo.propietario.primerApellido}}</td>
                 <th><button class="btn btn-sm btn-outline-success">Update</button></th>
                 <th><button (click)="onDeleteVehiculo(ingreso.id)" type="submit"
                     class="btn btn-sm btn-outline-danger">Delete</button></th>
