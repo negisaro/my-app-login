@@ -35,6 +35,7 @@ export class ListVehiculoComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.vehiculoService.deleteVehiculoById(id).subscribe(() => {
+          this.vehiculos = this.vehiculos.filter(vehiculos => vehiculos.id !== id)
           this.router
             .navigate(['/dashboard/vehiculo/list-vehiculos'], {
               skipLocationChange: true,
@@ -53,4 +54,8 @@ export class ListVehiculoComponent {
       }
     });
   }
+
+ /*  onSelectedVehiculo(vehiculo: Vehiculo): void {
+    this.router.navigate(['/dashboard/vehiculo/add-vehiculos', vehiculo.id]);
+  } */
 }

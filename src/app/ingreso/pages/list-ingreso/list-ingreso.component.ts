@@ -21,14 +21,18 @@ export class ListIngresoComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+    this.dataIngresos();
+  }
+
+  dataIngresos(){
     this.ingresoService.lisIngreso().subscribe(ingresos => this.ingresos = ingresos)
     console.log(this.ingresos);
   }
 
-  onDeleteVehiculo(id: number): void {
+  onDeleteIngreso(id: number): void {
     Swal.fire({
       title: 'Seguro que quiere eliminar?',
-      text: 'Cuidado el vehiculo sera eliminado del sistema!',
+      text: 'Cuidado el ingreso sera eliminado del sistema!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -37,6 +41,7 @@ export class ListIngresoComponent implements OnInit{
     }).then((result) => {
       if (result.isConfirmed) {
         this.ingresoService.deleteIngresoById(id).subscribe(() => {
+          this.ingresos = this.ingresos.filter(ingresos => ingresos.id !== id)
           this.router
             .navigate(['/dashboard/ingreso/list-ingresos'], {
               skipLocationChange: true,

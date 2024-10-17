@@ -17,6 +17,9 @@
                 <th scope="col" class=" px-6 py-4 text-left">#</th>
                 <th scope="col" class=" px-6 py-4">Fecha Ingreso </th>
                 <th scope="col" class=" px-6 py-4 text-left">Producido</th>
+                <th scope="col" class=" px-6 py-4 text-left">Liquidación</th>
+                <th scope="col" class=" px-6 py-4 text-left">Valor Gasolina</th>
+                <th scope="col" class=" px-6 py-4 text-left">Gasto Adicional</th>
                 <th scope="col" class=" px-6 py-4 text-left">Descripción</th>
                 <th scope="col" class=" px-6 py-4 text-left">Placa Carro</th>
                 <th scope="col" class=" px-6 py-4 text-left">Propietario</th>
@@ -26,13 +29,18 @@
             <tbody *ngFor="let ingreso of ingresos; let i = index ">
               <tr class="border-b border-neutral-200 dark:border-white/10 text-dark">
                 <td class="whitespace-nowrap  px-6 py-4 text-left"> {{i + 1}}</td>
-                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.fechaIngreso}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.fechaIngreso | date: 'dd-MM-yyyy'}}</td>
                 <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.producidoDiario | number}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.vrLiquidacion | number}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.vrGasolina | number}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.vrGastosAdicionales | number}}</td>
                 <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.descripcion}}</td>
                 <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.vehiculo.placa}}</td>
-                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{ingreso.vehiculo.propietario.primerNombre}}{{''}}{{ingreso.vehiculo.propietario.primerApellido}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left">
+                  {{ingreso.vehiculo.propietario.primerNombre}}{{''}}{{ingreso.vehiculo.propietario.primerApellido}}
+                </td>
                 <th><button class="btn btn-sm btn-outline-success">Update</button></th>
-                <th><button (click)="onDeleteVehiculo(ingreso.id)" type="submit"
+                <th><button (click)="onDeleteIngreso(ingreso.id)" type="submit"
                     class="btn btn-sm btn-outline-danger">Delete</button></th>
               </tr>
             </tbody>

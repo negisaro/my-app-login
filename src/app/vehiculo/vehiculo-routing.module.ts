@@ -18,6 +18,10 @@ const routes: Routes = [
     component: AddVehiculoComponent,
   },
   {
+    path: 'editar-vehiculos/:id',
+    component: AddVehiculoComponent,
+  },
+  {
     path: '**',
     redirectTo: 'home',
   }

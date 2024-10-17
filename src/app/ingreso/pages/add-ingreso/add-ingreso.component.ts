@@ -25,13 +25,16 @@ export class AddIngresoComponent implements OnInit {
   }
 
   public ingresoForm: FormGroup = this.fb.group({
-    id:                [0],
-    fechaIngreso:      ['', [this.vl.required]],
-    producidoDiario:   [0, [this.vl.required, this.vl.pattern(/^[0-9]*$/)]],
-    descripcion:       ['', [this.vl.required]],
+    id:                    [0],
+    fechaIngreso:          ['', [this.vl.required]],
+    producidoDiario:       [0,  [this.vl.required, this.vl.pattern(/^[0-9]*$/)]],
+    vrLiquidacion:         [0,  [this.vl.required, this.vl.pattern(/^[0-9]*$/)]],
+    vrGasolina:            [0,  [this.vl.required, this.vl.pattern(/^[0-9]*$/)]],
+    vrGastosAdicionales:   [0,  [this.vl.required, this.vl.pattern(/^[0-9]*$/)]],
+    descripcion:           ['', [this.vl.required]],
 
     vehiculo: this.fb.group({
-      id:             [0, [this.vl.required]],
+      id:                  [0,  [this.vl.required]],
     }),
   });
 

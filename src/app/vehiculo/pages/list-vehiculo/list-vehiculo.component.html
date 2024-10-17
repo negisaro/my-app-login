@@ -7,8 +7,7 @@
     <span class="text-4xl text-cyan-800 text-center font-medium leading-tight">Listado de Vehiculos</span>
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-        <button routerLink="/dashboard/vehiculo/add-vehiculos" class="btn btn-lm btn-outline-primary m-2">Nuevo
-          Vehiculo</button>
+        <button [routerLink]="['/dashboard/vehiculo/add-vehiculos']" class="btn btn-lm btn-outline-primary m-2">Nuevo Vehiculo</button>
         <div class="overflow-hidden">
           <table class="min-w-full text-center text-sm font-light text-surface dark:text-white" data-twe-spy="scroll"
             data-twe-target="#scrollspy-collapsible" data-twe-offset="0">
@@ -29,15 +28,17 @@
                 <td class="whitespace-nowrap  px-6 py-4 text-left"> {{i + 1}}</td>
                 <td class="whitespace-nowrap  px-6 py-4 text-left"> {{vehiculo.placa}}</td>
                 <td class="whitespace-nowrap  px-6 py-4 text-left"> {{vehiculo.marca}}</td>
-                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{vehiculo.modeloAnio}}</td>
+                <td class="whitespace-nowrap  px-6 py-4 text-left"> {{vehiculo.modeloAnio | date: 'dd-MM-yyyy'}}</td>
                 <td class="whitespace-nowrap  px-6 py-4 text-left"> {{vehiculo.modeloCarroceria}}</td>
                 <td class="whitespace-nowrap  px-6 py-4 text-left"> {{vehiculo.tipoCombustible}}</td>
                 <td class="whitespace-nowrap  px-6 py-4 text-left"> {{vehiculo.propietario.primerNombre}}{{" "}}
                   {{vehiculo.propietario.primerApellido}}</td>
 
-                <th><button class="btn btn-sm btn-outline-success">Update</button></th>
+                <th><button [routerLink]="['/dashboard/vehiculo/editar-vehiculos', vehiculo.id]"
+                    class="btn btn-sm btn-outline-success m-1">Actualizar</button></th>
+
                 <th><button (click)="onDeleteVehiculo(vehiculo.id)" type="submit"
-                    class="btn btn-sm btn-outline-danger">Delete</button></th>
+                    class="btn btn-sm btn-outline-danger">Eliminar</button></th>
               </tr>
             </tbody>
           </table>

@@ -4,16 +4,17 @@
     <form [formGroup]="ingresoForm" (ngSubmit)="onSubmit()">
       <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
 
-        <div class="w-full">
+        <div class="sm:col-span-2">
           <label for="fechaIngreso" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Fecha de
             Ingreso</label>
           <input formControlName="fechaIngreso" name="fechaIngreso" type="date" id="fechaIngreso"
             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light">
           <div *ngIf="ingresoForm.controls['fechaIngreso'].invalid && (ingresoForm.controls['fechaIngreso'].dirty
-            || ingresoForm.controls['fechaIngreso'].touched)">
-            <small Class="form -text text-danger" *ngIf="ingresoForm.controls['fechaIngreso'].errors?.['required']">
-              La fecha es requerida.
-            </small>
+             || ingresoForm.controls['fechaIngreso'].touched)">
+            <p *ngIf="ingresoForm.controls['fechaIngreso'].errors?.['required']"
+              class="mt-2 text-sm text-red-600 dark:text-red-500">
+              <span class="font-medium">Oops!</span> La fecha es requerida!
+            </p>
           </div>
         </div>
 
@@ -27,9 +28,66 @@
              || ingresoForm.controls['producidoDiario'].touched)">
             <p *ngIf="ingresoForm.controls['producidoDiario'].errors?.['required']"
               class="mt-2 text-sm text-red-600 dark:text-red-500">
-              <span class="font-medium">Oops!</span> El precio es requerido!
+              <span class="font-medium">Oops!</span> El Ingreso Diario es requerido!
             </p>
             <p *ngIf="ingresoForm.controls['producidoDiario'].errors?.['pattern']"
+              class="mt-2 text-sm text-red-600 dark:text-red-500">
+              <span class="font-medium">Oops!</span> Debes ingresar solo números!
+            </p>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <label for="vrLiquidacion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Valor
+            liquidación</label>
+          <input formControlName="vrLiquidacion" type="number" name="vrLiquidacion" id="vrLiquidacion"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="0">
+          <div *ngIf="ingresoForm.controls['vrLiquidacion'].invalid && (ingresoForm.controls['vrLiquidacion'].dirty
+             || ingresoForm.controls['vrLiquidacion'].touched)">
+            <p *ngIf="ingresoForm.controls['vrLiquidacion'].errors?.['required']"
+              class="mt-2 text-sm text-red-600 dark:text-red-500">
+              <span class="font-medium">Oops!</span> El Valor de la liquidación es requerido!
+            </p>
+            <p *ngIf="ingresoForm.controls['vrLiquidacion'].errors?.['pattern']"
+              class="mt-2 text-sm text-red-600 dark:text-red-500">
+              <span class="font-medium">Oops!</span> Debes ingresar solo números!
+            </p>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <label for="vrGasolina" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Valor
+            gasolina</label>
+          <input formControlName="vrGasolina" type="number" name="vrGasolina" id="vrGasolina"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="0">
+          <div *ngIf="ingresoForm.controls['vrGasolina'].invalid && (ingresoForm.controls['vrGasolina'].dirty
+             || ingresoForm.controls['vrGasolina'].touched)">
+            <p *ngIf="ingresoForm.controls['vrGasolina'].errors?.['required']"
+              class="mt-2 text-sm text-red-600 dark:text-red-500">
+              <span class="font-medium">Oops!</span> El valor de la gasolina es requerido!
+            </p>
+            <p *ngIf="ingresoForm.controls['vrGasolina'].errors?.['pattern']"
+              class="mt-2 text-sm text-red-600 dark:text-red-500">
+              <span class="font-medium">Oops!</span> Debes ingresar solo números!
+            </p>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <label for="vrGastosAdicionales" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
+            Adicionales</label>
+          <input formControlName="vrGastosAdicionales" type="number" name="vrGastosAdicionales" id="vrGastosAdicionales"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="0">
+          <div *ngIf="ingresoForm.controls['vrGastosAdicionales'].invalid && (ingresoForm.controls['vrGastosAdicionales'].dirty
+             || ingresoForm.controls['vrGastosAdicionales'].touched)">
+            <p *ngIf="ingresoForm.controls['vrGastosAdicionales'].errors?.['required']"
+              class="mt-2 text-sm text-red-600 dark:text-red-500">
+              <span class="font-medium">Oops!</span> El precio es requerido!
+            </p>
+            <p *ngIf="ingresoForm.controls['vrGastosAdicionales'].errors?.['pattern']"
               class="mt-2 text-sm text-red-600 dark:text-red-500">
               <span class="font-medium">Oops!</span> Debes ingresar solo números!
             </p>
@@ -41,7 +99,7 @@
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
           <textarea formControlName="descripcion" name="descripcion" id="descripcion" rows="5"
             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            placeholder="Descripción del producto"></textarea>
+            placeholder="Descripción del ingreso"></textarea>
           <div *ngIf="ingresoForm.controls['descripcion'].invalid && (ingresoForm.controls['descripcion'].dirty
             || ingresoForm.controls['descripcion'].touched)">
             <p *ngIf="ingresoForm.controls['descripcion'].errors?.['required']"
@@ -82,6 +140,4 @@
     </form>
   </div>
 </section>
-<pre>
-  {{currentIngreso | json}}
-</pre>
+<p>Form Status: {{ ingresoForm.status }}</p>

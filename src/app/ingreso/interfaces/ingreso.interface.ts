@@ -2,6 +2,9 @@ export interface Ingreso {
   id: number;
   fechaIngreso: Date;
   producidoDiario: number;
+  vrLiquidacion: number;
+  vrGasolina: number;
+  vrGastosAdicionales: number;
   descripcion: string;
   vehiculo: Vehiculo;
 }

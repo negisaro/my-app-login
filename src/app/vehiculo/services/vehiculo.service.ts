@@ -17,13 +17,16 @@ export class VehiculoService {
     return this.http.get<Vehiculo[]>(`${this.baseUrl}/api/vehiculos`)
   }
 
+  findById(id: number): Observable<Vehiculo> {
+    return this.http.get<Vehiculo>(`${this.baseUrl}/api/vehiculos/${id}`);
+  }
+
   addVehiculo(vehiculo: Vehiculo): Observable<Vehiculo> {
     return this.http.post<Vehiculo>(`${this.baseUrl}/api/vehiculos/create`, vehiculo);
   }
 
-  updateVehiculo(vehiculo: Vehiculo): Observable<Vehiculo> {
-    if (!vehiculo.id) throw Error('vehiculo requerido');
-    return this.http.post<Vehiculo>(`${this.baseUrl}/api/vehiculos`, vehiculo);
+  updateVehiculo(vehiculo: Vehiculo): Observable<Vehiculo> {    
+    return this.http.put<Vehiculo>(`${this.baseUrl}/api/vehiculos/${vehiculo.id}`, vehiculo);
   }
 
   deleteVehiculoById(id: number): Observable<boolean> {
